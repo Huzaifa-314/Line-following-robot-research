@@ -5,7 +5,7 @@ int lastposition;
 int setpoint=3000;
 
 //pid variables
-const float kp=0.053333333333;
+const float kp=0.083333333333;
 
 int basespeed = 130;
 //left motor

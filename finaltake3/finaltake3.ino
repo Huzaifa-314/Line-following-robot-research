@@ -1,14 +1,14 @@
 const int sensorcount=7;
-int sensorpins[sensorcount]={13,12,11,10,9,8,7};
+int sensorpins[sensorcount]={12,11,10,19,8,7,4};
 int sensorvalues[sensorcount];
 int setpoint=((sensorcount-1)*1000)/2;
 
 //pid variables
-const float kp=0.043333333333;
-const float kd=0.04;
+const float kp=0.010333333333;
+const float kd=0.2;
 const float ki = 0.0008;
 
-int basespeed = 115;
+int basespeed = 180;
 
 //left motor
 #define enl 6 //enable left
@@ -63,30 +63,26 @@ void drive(int speedl,int speedr){
   analogWrite(enr, speedr);
   
 }
-void driveleft(int speedl,int speedr){
-  speedr = constrain(speedr, 0, 255);
-  speedl = constrain(speedl, 0, 255);
+void driveleft(){
   // Turn on motor A & B
   digitalWrite(lfm, LOW);
   digitalWrite(lbm, HIGH);
   digitalWrite(rfm, HIGH);
   digitalWrite(rbm, LOW);
 
-  analogWrite(enl, speedl);
-  analogWrite(enr, speedr);
+  analogWrite(enl, 95);
+  analogWrite(enr, 90);
   
 }
-void driveright(int speedl,int speedr){
-  speedr = constrain(speedr, 0, 255);
-  speedl = constrain(speedl, 0, 255);
+void driveright(){
   // Turn on motor A & B
   digitalWrite(lfm, HIGH);
   digitalWrite(lbm, LOW);
   digitalWrite(rfm, LOW);
   digitalWrite(rbm, HIGH);
 
-  analogWrite(enl, speedl);
-  analogWrite(enr, speedr);
+  analogWrite(enl, 90);
+  analogWrite(enr, 95);
   
 }
 
@@ -107,11 +103,14 @@ void loop() {
   int position = mvalues/sum;
   if(position == -1 && lastposition > setpoint){
     position = 6000;
+    driveright();
   }
-  if(position == -1 && lastposition < setpoint){
+  else if(position == -1 && lastposition < setpoint){
     position = 0;
+    driveleft();
+    
   }
-  //else{
+  else{
   Serial.print(position);
   Serial.print('\t');
   
@@ -137,7 +136,7 @@ void loop() {
   
   
   drive(speedl,speedr);
-  //}
+  }
 
   
   lastposition = position;

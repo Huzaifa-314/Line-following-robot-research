@@ -27,11 +27,11 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   digitalWrite(lfm, LOW);
-  digitalWrite(lbm, HIGH);
+  digitalWrite(lbm, LOW);
   digitalWrite(rfm, LOW);
   digitalWrite(rbm, LOW);
 
-  analogWrite(enl, 255);
-  analogWrite(enr, 255);
+  analogWrite(enl, 50);
+  analogWrite(enr, 50);
 
 }
