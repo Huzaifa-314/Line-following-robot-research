@@ -1,8 +1,8 @@
-const int sensorcount=7;
-int sensorpins[sensorcount]={13,12,11,10,9,8,7};
+const int sensorcount=5;
+int sensorpins[sensorcount]={11,10,19,8,7};
 int sensorvalues[sensorcount];
+int setpoint=((sensorcount-1)*1000)/2;
 int lastposition;
-int setpoint=3000;
 
 //pid variables
 const float kp=0.083333333333;
@@ -67,10 +67,10 @@ void loop(){
   }
   int position = mvalues/sum;
   if(position == -1 && lastposition > setpoint){
-    position = 6000;
+    position = 0;
   }
   if(position == -1 && lastposition < setpoint){
-    position = 0;
+    position = 6000;
   }
   lastposition = position;
   

@@ -1,10 +1,10 @@
-const int sensorcount=7;
-int sensorpins[sensorcount]={12,11,10,19,8,7,4};
+const int sensorcount=5;
+int sensorpins[sensorcount]={11,10,19,8,7};
 int sensorvalues[sensorcount];
 int setpoint=((sensorcount-1)*1000)/2;
 
 //pid variables
-const float kp=0.010333333333;
+const float kp=0.017333333333;
 const float kd=0.2;
 const float ki = 0.0008;
 
